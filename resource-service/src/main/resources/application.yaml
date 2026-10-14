@@ -1,0 +1,23 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: resource-service
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/resource_db
+    username: postgres
+    password: ${DB_PASSWORD}
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+storage:
+  s3:
+    endpoint: http://localhost:4566
+    region: us-east-1
+    access-key: test
+    secret-key: test
+    bucket: audio-resources

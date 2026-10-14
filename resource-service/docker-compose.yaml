@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  localhost:
+    container_name: localstack-main
+    image: localstack/localstack
+    ports:
+      - "127.0.0.1:4566:4566"
+      - "127.0.0.1:4510-4559:4510-4559"
+    environment:
+      - DEBUG=1
+      - LOCALSTACK_AUTH_TOKEN=ls-MaWi5478-VABi-rulI-zUXA-9702Jisac1fb
+    volumes:
+      - "./volume:/var/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+  
