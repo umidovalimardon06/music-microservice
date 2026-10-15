@@ -1,5 +1,7 @@
 package uz.songservice.infrastructure.persistence.adapter;
 
+import java.util.List;
+import java.util.Optional;
 import uz.songservice.domain.Song;
 import jakarta.transaction.Transactional;
 import uz.songservice.domain.SongRepository;
@@ -7,9 +9,6 @@ import org.springframework.stereotype.Repository;
 import uz.songservice.infrastructure.persistence.entity.SongJpaEntity;
 import uz.songservice.infrastructure.persistence.SpringDataSongRepository;
 import uz.songservice.infrastructure.persistence.mapper.SongPersistenceMapper;
-
-import java.util.List;
-import java.util.Optional;
 
 @Repository
 @Transactional()

@@ -1,10 +1,10 @@
 package uz.songservice.application;
 
+import java.util.List;
 import uz.songservice.domain.Song;
 import uz.songservice.domain.SongRepository;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
+import uz.songservice.application.exception.SongNotFoundException;
 
 @Service
 public class SongService {
@@ -19,8 +19,7 @@ public class SongService {
     }
 
     public Song getSong(Long id) {
-        return repository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Song not found"));
+        return repository.findById(id).orElseThrow(() -> new SongNotFoundException(id));
     }
 
     public List<Long> deleteSongs(List<Long> ids) {
