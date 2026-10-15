@@ -1,4 +1,4 @@
-package uz.resourceservice.infrasructure.persistance.adapter;
+package uz.resourceservice.infrasructure.s3.adapter;
 
 import org.springframework.stereotype.Component;
 import software.amazon.awssdk.services.s3.S3Client;

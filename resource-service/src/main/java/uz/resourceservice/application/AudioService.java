@@ -1,12 +1,13 @@
 package uz.resourceservice.application;
 
-import java.util.List;
 import java.util.UUID;
 import org.springframework.stereotype.Service;
 import uz.resourceservice.domain.AudioResource;
 import uz.resourceservice.application.port.AudioStorage;
 import uz.resourceservice.domain.AudioResourceRepository;
 import org.springframework.beans.factory.annotation.Value;
+import uz.resourceservice.application.exception.EmptyAudioException;
+import uz.resourceservice.application.exception.AudioNotFoundException;
 
 @Service
 public class AudioService {
@@ -24,7 +25,7 @@ public class AudioService {
     }
 
     public AudioResource upload(byte[] audio) {
-        if (audio == null || audio.length == 0) throw new IllegalArgumentException("Audio must not be empty");
+        if (audio == null || audio.length == 0) throw new EmptyAudioException("Audio must not be empty");
         String objectKey = "resources/" + UUID.randomUUID() + ".mp3";
         AudioResource resource = AudioResource.create(
                 bucket,
@@ -36,12 +37,14 @@ public class AudioService {
     }
 
     public byte[] download(Long id) {
-        AudioResource resource = repository.findById(id).orElseThrow(() -> new IllegalArgumentException("Resource not found"));
+        AudioResource resource = repository.findById(id)
+                .orElseThrow(() -> new AudioNotFoundException("Resource not found:" + id));
         return storage.download(resource.getBucket(), resource.getObjectKey());
     }
 
     public Integer deleteById(Long id) {
-        AudioResource resource = repository.findById(id).orElseThrow(() -> new IllegalArgumentException("Resource not found"));
+        AudioResource resource = repository.findById(id)
+                .orElseThrow(() -> new AudioNotFoundException("Resource not found:" + id));
         storage.delete(resource.getBucket(), resource.getObjectKey());
         repository.deleteById(id);
         return id.intValue();

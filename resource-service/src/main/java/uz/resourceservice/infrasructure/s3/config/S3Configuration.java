@@ -1,4 +1,4 @@
-package uz.resourceservice.infrasructure.persistance.config;
+package uz.resourceservice.infrasructure.s3.config;
 
 import java.net.URI;
 import software.amazon.awssdk.regions.Region;
