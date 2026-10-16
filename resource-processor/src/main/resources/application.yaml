@@ -3,3 +3,9 @@ spring:
     name: resource-processor
   main:
     web-application-type: none
+
+clients:
+  resource:
+    url: http://localhost:8081
+  song:
+    url: http://localhost:8080
